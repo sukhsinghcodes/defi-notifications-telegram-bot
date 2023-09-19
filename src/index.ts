@@ -14,12 +14,20 @@ bot.start(async (ctx) => {
       return;
     }
 
-    ctx.telegram.sendMessage(ctx.from.id, 'Setup a notification for yourself', {
-      parse_mode: 'Markdown',
-      reply_markup: Markup.inlineKeyboard([
-        Markup.button.webApp('Setup', `${AppConfig.WebAppUrl}&chatId=${ctx.chat.id}`),
-      ]).reply_markup,
-    });
+    ctx.telegram.sendMessage(
+      ctx.from.id,
+      'Get free mobile notifications for important on-chain events in your favorite DeFi projects.\n\nJoin [our channel](https://t.me/defi_notifications) to receive updates and promotions.',
+      {
+        parse_mode: 'Markdown',
+        reply_markup: Markup.inlineKeyboard([
+          [
+            Markup.button.url('💬 Support', 'https://t.me/defi_notifications'),
+            Markup.button.url('🌎 Website', 'https://www.orbs.com/notifications/'),
+          ],
+          [Markup.button.webApp('📤 Open app', `${AppConfig.WebAppUrl}&chatId=${ctx.chat.id}`)],
+        ]).reply_markup,
+      },
+    );
   } catch (err) {
     console.log('An error occured when executing the start command', err);
   }
@@ -51,7 +59,7 @@ bot.action('setup', async (ctx) => {
     ctx.telegram.sendMessage(ctx.callbackQuery.from.id, reply, {
       parse_mode: 'Markdown',
       reply_markup: Markup.inlineKeyboard([
-        Markup.button.webApp('Setup', `${AppConfig.WebAppUrl}&chatId=${chat.id}`),
+        Markup.button.webApp('Next ➡️', `${AppConfig.WebAppUrl}&chatId=${chat.id}`),
       ]).reply_markup,
     });
   } catch (err) {
