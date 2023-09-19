@@ -17,7 +17,7 @@ bot.start(async (ctx) => {
     ctx.telegram.sendMessage(ctx.from.id, 'Setup a notification for yourself', {
       parse_mode: 'Markdown',
       reply_markup: Markup.inlineKeyboard([
-        Markup.button.webApp('Setup', `${AppConfig.WebAppUrl}?chatId=${ctx.chat.id}`),
+        Markup.button.webApp('Setup', `${AppConfig.WebAppUrl}&chatId=${ctx.chat.id}`),
       ]).reply_markup,
     });
   } catch (err) {
@@ -51,7 +51,7 @@ bot.action('setup', async (ctx) => {
     ctx.telegram.sendMessage(ctx.callbackQuery.from.id, reply, {
       parse_mode: 'Markdown',
       reply_markup: Markup.inlineKeyboard([
-        Markup.button.webApp('Setup', `${AppConfig.WebAppUrl}?chatId=${chat.id}`),
+        Markup.button.webApp('Setup', `${AppConfig.WebAppUrl}&chatId=${chat.id}`),
       ]).reply_markup,
     });
   } catch (err) {
