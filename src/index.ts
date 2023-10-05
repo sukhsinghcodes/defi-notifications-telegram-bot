@@ -20,10 +20,24 @@ bot.start(async (ctx) => {
             Markup.button.url('💬 Support', 'https://t.me/defi_notifications'),
             Markup.button.url('🌎 Website', 'https://www.orbs.com/notifications'),
           ],
-          [Markup.button.webApp('📤 Open app', `${AppConfig.WebAppUrl}&chatId=${ctx.chat.id}`)],
+          [
+            Markup.button.webApp(
+              '🔔 Setup notification',
+              `${AppConfig.WebAppUrl}&telegramId=${ctx.chat.id}`,
+            ),
+          ],
         ]).reply_markup,
       },
     );
+
+    bot.telegram.setChatMenuButton({
+      chatId: ctx.chat.id,
+      menuButton: {
+        web_app: { url: `${AppConfig.WebAppUrl}&telegramId=${ctx.chat.id}` },
+        text: '🔔 Notification',
+        type: 'web_app',
+      },
+    });
   } catch (err) {
     console.log('An error occured when executing the start command', err);
   }
